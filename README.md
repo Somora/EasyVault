@@ -26,4 +26,4 @@ If you encounter any issues or have suggestions for improvements, please feel fr
 Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request with your proposed changes or improvements.
 
 ## License
-This addon is released under the MIT License. Feel free to use, modify, and distribute it as you see fit.
+This addon is released under the GPL-3.0 License. Feel free to use, modify, and distribute it as you see fit.
