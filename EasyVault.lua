@@ -2,58 +2,56 @@
 local function CreateMinimapButton()
     -- Create a new button frame attached to the Minimap
     local btn = CreateFrame("Button", "WeeklyRewardsMinimapBtn", Minimap)
-    -- Set the size of the button
-    btn:SetSize(32, 32)
-    -- Set the frame strata to ensure the button appears above other UI elements
-    btn:SetFrameStrata("MEDIUM")
-    -- Set the icon texture of the button to a gold coin
-    btn:SetNormalTexture("Interface\\Icons\\INV_Misc_Coin_01")
-    -- Position the button on the top-left corner of the Minimap (adjust as needed)
-    btn:SetPoint("TOPLEFT")
+    btn:SetSize(32, 32)  -- Set the size of the button
+    btn:SetFrameStrata("MEDIUM")  -- Ensure the button appears above other UI elements
+    btn:SetNormalTexture("Interface\\Icons\\INV_Misc_Coin_01")  -- Set the icon texture
+    btn:SetPoint("TOPLEFT")  -- Position the button on the top-left corner of the Minimap (adjust as needed)
+
+    -- Enable dragging of the minimap button
+    btn:SetMovable(true)
+    btn:EnableMouse(true)
+    btn:RegisterForDrag("LeftButton")
+    btn:SetScript("OnDragStart", btn.StartMoving)
+    btn:SetScript("OnDragStop", btn.StopMovingOrSizing)
 
     -- Define the functionality when the button is clicked
     btn:SetScript("OnClick", function()
-        -- Check if the Weekly Rewards addon is loaded and the frame is visible
-        if IsAddOnLoaded("Blizzard_WeeklyRewards") and WeeklyRewardsFrame:IsShown() then
-            -- Hide the frame if it is already shown
+        -- Load the Weekly Rewards addon using C_AddOns.LoadAddOn
+        C_AddOns.LoadAddOn("Blizzard_WeeklyRewards")
+
+        -- Toggle the visibility of the Weekly Rewards frame
+        if WeeklyRewardsFrame:IsShown() then
             WeeklyRewardsFrame:Hide()
         else
-            -- Load the Weekly Rewards addon if not already loaded
-            LoadAddOn("Blizzard_WeeklyRewards")
-            -- Show the Weekly Rewards frame
             WeeklyRewardsFrame:Show()
         end
+
+        -- Make the Weekly Rewards frame movable and draggable
+        WeeklyRewardsFrame:SetMovable(true)
+        WeeklyRewardsFrame:EnableMouse(true)
+        WeeklyRewardsFrame:RegisterForDrag("LeftButton")
+        WeeklyRewardsFrame:SetScript("OnDragStart", function(self)
+            self:StartMoving()
+        end)
+        WeeklyRewardsFrame:SetScript("OnDragStop", function(self)
+            self:StopMovingOrSizing()
+            -- Optionally, save the frame's position to retain it between sessions
+            local point, relativeTo, relativePoint, xOfs, yOfs = self:GetPoint()
+            self:ClearAllPoints()
+            self:SetPoint(point, relativeTo, relativePoint, xOfs, yOfs)
+        end)
+
+        -- Ensure the frame is registered to be closed with the ESC key
+        -- Commented out to remove ESC key functionality
+        -- table.insert(UISpecialFrames, "WeeklyRewardsFrame")
     end)
 
-    -- Define the tooltip behavior when the mouse hovers over the button
-    btn:SetScript("OnEnter", function(self)
-        -- Set the tooltip's anchor to the left of the button
-        GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-        -- Add a line to the tooltip indicating the purpose of the button in yellow
-        GameTooltip:AddLine("Weekly Rewards", 1, 1, 0) -- Yellow text
-        -- Add another line providing instructions to the user
-        GameTooltip:AddLine("Click to toggle the Weekly Rewards frame.", 0.8, 0.8, 0.8, 1) -- Light gray text
-        -- Show the tooltip
-        GameTooltip:Show()
-    end)
-    
     -- Define the behavior when the mouse leaves the button
     btn:SetScript("OnLeave", function()
         -- Hide the tooltip
         GameTooltip:Hide()
     end)
-
-    -- Enable the button to be movable
-    btn:SetMovable(true)
-    -- Enable mouse interaction with the button
-    btn:EnableMouse(true)
-    -- Register the left mouse button for dragging the button
-    btn:RegisterForDrag("LeftButton")
-    -- Define behavior when dragging starts
-    btn:SetScript("OnDragStart", btn.StartMoving)
-    -- Define behavior when dragging stops
-    btn:SetScript("OnDragStop", btn.StopMovingOrSizing)
 end
 
--- Call the function to create the minimap button
+-- Create the minimap button
 CreateMinimapButton()

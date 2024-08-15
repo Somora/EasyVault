@@ -1,8 +1,8 @@
-## Interface: 110000
-## X-Min-Interface: 110000
+## Interface: 110002
+## X-Min-Interface: 110002
 ## Title: Somora's EasyVault
 ## Notes: This AddOn makes it easy to view your vault.
 ## Author: Somora
-## Version: 1.03
+## Version: 1.04
 ## DefaultState: enabled
 EasyVault.lua
