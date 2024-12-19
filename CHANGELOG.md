@@ -18,3 +18,6 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.04 (2024-08-15):
 - Updated addon for The War Within build version 110002.
+
+## Version 1.05 (2024-12-19):
+- Updated addon for The War Within build version 110007.
