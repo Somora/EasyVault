@@ -21,3 +21,6 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.05 (2024-12-19):
 - Updated addon for The War Within build version 110007.
+
+## Version 1.06 (2025-02-26):
+- Updated addon for The War Within build version 110100. (Undermine(d))
