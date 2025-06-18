@@ -27,3 +27,6 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.07 (2025-04-25):
 - Updated addon for The War Within build version 110105. (Nightfall)
+
+## Version 1.08 (2025-06-18):
+- Updated addon for The War Within build version 110107. (Legacy of Arathor)
