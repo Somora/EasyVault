@@ -30,3 +30,6 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.08 (2025-06-18):
 - Updated addon for The War Within build version 110107. (Legacy of Arathor)
+
+## Version 1.09 (2025-08-29):
+- Updated addon for The War Within build version 110205. (Ghosts of K'aresh)
