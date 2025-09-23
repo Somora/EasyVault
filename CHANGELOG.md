@@ -33,3 +33,10 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.09 (2025-08-29):
 - Updated addon for The War Within build version 110205. (Ghosts of K'aresh)
+
+## Version 1.10 (2025-09-23):
+- Fixed version number in TOC file (incompatibility error in client) 110205 -> 110200
+- Drag scripts for WeeklyRewardsFrame are set only once.
+- Added tooltip on hover.
+- Added checks for WeeklyRewardsFrame and LoadAddOn.
+- Cached global functions for minor performance gain.
