@@ -40,3 +40,6 @@ All notable changes to this project will be documented in this file.
 - Added tooltip on hover.
 - Added checks for WeeklyRewardsFrame and LoadAddOn.
 - Cached global functions for minor performance gain.
+
+## Version 1.11 (2025-12-07):
+- Updated addon for The War Within build version 110207. (The Warning)
