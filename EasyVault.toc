@@ -2,6 +2,10 @@
 ## Title: Somora's EasyVault
 ## Notes: This AddOn makes it easy to view your vault.
 ## Author: Somora
-## Version: 1.12
+## Version: 1.19
 ## DefaultState: enabled
+## SavedVariables: EasyVaultDB
+Libs\LibStub\LibStub.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
 EasyVault.lua
