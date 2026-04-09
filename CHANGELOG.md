@@ -82,3 +82,6 @@ All notable changes to this project will be documented in this file.
 - Polished the embedded `LibDBIcon` implementation to better match the look and feel of common minimap launcher buttons.
 - Added broader minimap shape handling for square, side, and corner-style minimaps.
 - Improved tooltip handling so launcher data objects can provide their own tooltip content cleanly.
+
+## Version 1.20 (2026-04-09):
+- Added an explicit launcher tooltip for the minimap button so hover text also works reliably through LibDataBroker displays.

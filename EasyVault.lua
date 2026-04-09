@@ -113,6 +113,12 @@ local launcher = LDB:NewDataObject(addonName, {
             ToggleWeeklyRewards(EasyVaultDB)
         end
     end,
+    OnTooltipShow = function(tooltip)
+        tooltip:AddLine("Weekly Rewards", 1, 1, 1)
+        tooltip:AddLine(" ")
+        tooltip:AddLine("Left-click to open or close the Weekly Rewards window.", 0.8, 0.8, 0.8)
+        tooltip:AddLine("Drag to move this button around the minimap.", 0.8, 0.8, 0.8)
+    end,
 })
 
 local addonFrame = CreateFrame("Frame")
