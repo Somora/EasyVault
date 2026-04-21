@@ -85,3 +85,7 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.20 (2026-04-09):
 - Added an explicit launcher tooltip for the minimap button so hover text also works reliably through LibDataBroker displays.
+
+## Version 1.21 (2026-04-21):
+- Registered the Weekly Rewards frame with `UISpecialFrames` so it can be closed with ESC.
+- Updated the minimap tooltip to mention ESC close support.

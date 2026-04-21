@@ -60,10 +60,30 @@ local function ApplyPosition(frame, store, defaultRelativeTo, defaultRelativePoi
     )
 end
 
+local function RegisterWeeklyRewardsFrameForEscape()
+    if not WeeklyRewardsFrame or WeeklyRewardsFrame._easyvault_escape_registered then
+        return
+    end
+
+    UISpecialFrames = UISpecialFrames or {}
+
+    for _, frameName in ipairs(UISpecialFrames) do
+        if frameName == "WeeklyRewardsFrame" then
+            WeeklyRewardsFrame._easyvault_escape_registered = true
+            return
+        end
+    end
+
+    table.insert(UISpecialFrames, "WeeklyRewardsFrame")
+    WeeklyRewardsFrame._easyvault_escape_registered = true
+end
+
 local function MakeWeeklyRewardsFrameMovable(db)
     if not WeeklyRewardsFrame then
         return
     end
+
+    RegisterWeeklyRewardsFrameForEscape()
 
     if not WeeklyRewardsFrame._easyvault_positioned then
         ApplyPosition(WeeklyRewardsFrame, db.weeklyRewardsFrame, "UIParent", "CENTER")
@@ -117,6 +137,7 @@ local launcher = LDB:NewDataObject(addonName, {
         tooltip:AddLine("Weekly Rewards", 1, 1, 1)
         tooltip:AddLine(" ")
         tooltip:AddLine("Left-click to open or close the Weekly Rewards window.", 0.8, 0.8, 0.8)
+        tooltip:AddLine("Press ESC to close the Weekly Rewards window.", 0.8, 0.8, 0.8)
         tooltip:AddLine("Drag to move this button around the minimap.", 0.8, 0.8, 0.8)
     end,
 })
