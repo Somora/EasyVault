@@ -89,3 +89,6 @@ All notable changes to this project will be documented in this file.
 ## Version 1.21 (2026-04-21):
 - Registered the Weekly Rewards frame with `UISpecialFrames` so it can be closed with ESC.
 - Updated the minimap tooltip to mention ESC close support.
+
+## Version 1.22 (2026-04-22):
+- Updated addon interface version for World of Warcraft patch 12.0.5 (`120005`).
