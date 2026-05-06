@@ -1,0 +1,13 @@
+﻿package-as: EasyVault
+
+manual-changelog: CHANGELOG.md
+
+ignore:
+  - .git
+  - .github
+  - .gitattributes
+  - .gitignore
+  - .pkgmeta
+  - CHANGELOG.md
+  - LICENSE
+  - README.md
