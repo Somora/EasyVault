@@ -92,3 +92,6 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.22 (2026-04-22):
 - Updated addon interface version for World of Warcraft patch 12.0.5 (`120005`).
+
+## Version 1.23 (2026-06-17):
+- Updated addon interface version for World of Warcraft patch 12.0.7 (`120007`).
