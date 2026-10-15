@@ -1,8 +1,8 @@
-## Interface: 120100
+## Interface: 120105
 ## Title: Somora's EasyVault
 ## Notes: This AddOn makes it easy to view your vault.
 ## Author: Somora
-## Version: 1.24
+## Version: 1.25
 ## DefaultState: enabled
 ## SavedVariables: EasyVaultDB
 Libs\LibStub\LibStub.lua

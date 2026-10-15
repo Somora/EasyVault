@@ -98,3 +98,6 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.24 (2026-08-12):
 - Updated addon interface version for World of Warcraft patch 12.1.0 (`120100`).
+
+## Version 1.25 (2026-10-15):
+- Updated addon interface version for World of Warcraft Retail patch 12.1.5 (`120105`).
