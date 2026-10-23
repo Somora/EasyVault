@@ -11,3 +11,5 @@ ignore:
   - CHANGELOG.md
   - LICENSE
   - README.md
+  - tests
+  - docs

@@ -1,6 +1,12 @@
 # EasyVault Changelog
 All notable changes to this project will be documented in this file.
 
+## Version 1.26 (2026-10-23):
+- Route Weekly Rewards toggling through Blizzard's panel manager and let it handle ESC closing.
+- Block addon-driven Weekly Rewards toggling and dragging during combat.
+- Preserve Blizzard frame scripts with hooks and restore the saved window position on each opening.
+- Replace incompatible library imitations with upstream LibStub, CallbackHandler, LibDataBroker, and LibDBIcon.
+
 ## Version 1.0 (2024-02-09):
 - Initial release of the addon.
 - Implemented a minimap button for toggling the Weekly Rewards frame.

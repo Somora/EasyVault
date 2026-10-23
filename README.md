@@ -18,6 +18,7 @@ EasyVault is a lightweight World of Warcraft addon that adds a convenient minima
 
 ## Usage
 * **Opening/Closing Weekly Rewards:** Simply click on the minimap button to toggle the Weekly Rewards frame. If the frame is open, clicking the button will close it, and vice versa.
+  Opening or closing through the addon is unavailable during combat.
 * **Moving the Button:** Click and drag the button to reposition it around the edge of your minimap to suit your preference.
 * **Moving the Weekly Rewards Window:** Open the Weekly Rewards UI and drag it with the left mouse button. The addon will remember its last position.
 

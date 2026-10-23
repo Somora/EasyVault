@@ -2,9 +2,11 @@ local addonName = ...
 
 local CreateFrame = CreateFrame
 local LoadAddOn = C_AddOns and C_AddOns.LoadAddOn
+local InCombatLockdown = InCombatLockdown
 
 local LDB = LibStub("LibDataBroker-1.1")
 local LDBIcon = LibStub("LibDBIcon-1.0")
+local configuredWeeklyRewardsFrame
 
 local DEFAULT_VAULT_POSITION = {
     point = "CENTER",
@@ -60,55 +62,50 @@ local function ApplyPosition(frame, store, defaultRelativeTo, defaultRelativePoi
     )
 end
 
-local function RegisterWeeklyRewardsFrameForEscape()
-    if not WeeklyRewardsFrame or WeeklyRewardsFrame._easyvault_escape_registered then
-        return
-    end
-
-    UISpecialFrames = UISpecialFrames or {}
-
-    for _, frameName in ipairs(UISpecialFrames) do
-        if frameName == "WeeklyRewardsFrame" then
-            WeeklyRewardsFrame._easyvault_escape_registered = true
-            return
-        end
-    end
-
-    table.insert(UISpecialFrames, "WeeklyRewardsFrame")
-    WeeklyRewardsFrame._easyvault_escape_registered = true
-end
-
 local function MakeWeeklyRewardsFrameMovable(db)
-    if not WeeklyRewardsFrame then
+    local frame = WeeklyRewardsFrame
+    if not frame or InCombatLockdown() or configuredWeeklyRewardsFrame == frame then
         return
     end
 
-    RegisterWeeklyRewardsFrameForEscape()
-
-    if not WeeklyRewardsFrame._easyvault_positioned then
-        ApplyPosition(WeeklyRewardsFrame, db.weeklyRewardsFrame, "UIParent", "CENTER")
-        WeeklyRewardsFrame._easyvault_positioned = true
-    end
-
-    if WeeklyRewardsFrame._easyvault_movable then
-        return
-    end
-
-    WeeklyRewardsFrame:SetClampedToScreen(true)
-    WeeklyRewardsFrame:SetMovable(true)
-    WeeklyRewardsFrame:EnableMouse(true)
-    WeeklyRewardsFrame:RegisterForDrag("LeftButton")
-    WeeklyRewardsFrame:SetScript("OnDragStart", WeeklyRewardsFrame.StartMoving)
-    WeeklyRewardsFrame:SetScript("OnDragStop", function(self)
-        self:StopMovingOrSizing()
-        SavePosition(self, db.weeklyRewardsFrame, "UIParent")
+    frame:SetClampedToScreen(true)
+    frame:SetMovable(true)
+    frame:RegisterForDrag("LeftButton")
+    -- Preserve Blizzard's scripts and keep addon bookkeeping off its frame.
+    frame:HookScript("OnDragStart", function(self)
+        if not InCombatLockdown() then
+            self:StartMoving()
+        end
     end)
-    WeeklyRewardsFrame._easyvault_movable = true
+    frame:HookScript("OnDragStop", function(self)
+        self:StopMovingOrSizing()
+        if not InCombatLockdown() then
+            SavePosition(self, db.weeklyRewardsFrame, "UIParent")
+        end
+    end)
+    -- ShowUIPanel restores Blizzard's anchors on each open, before OnShow.
+    frame:HookScript("OnShow", function(self)
+        if not InCombatLockdown() then
+            ApplyPosition(self, db.weeklyRewardsFrame, "UIParent", "CENTER")
+        end
+    end)
+    configuredWeeklyRewardsFrame = frame
 end
 
 local function ToggleWeeklyRewards(db)
+    -- Blizzard's panel manager rejects addon show/hide requests in combat.
+    -- Do this before loading or modifying any Blizzard UI.
+    if InCombatLockdown() then
+        UIErrorsFrame:AddMessage("EasyVault: Weekly Rewards cannot be toggled during combat.", 1, 0.2, 0.2)
+        return
+    end
+
     if LoadAddOn and not WeeklyRewardsFrame then
-        LoadAddOn("Blizzard_WeeklyRewards")
+        local loaded = LoadAddOn("Blizzard_WeeklyRewards")
+        if not loaded then
+            UIErrorsFrame:AddMessage("EasyVault: Could not load the Weekly Rewards UI.", 1, 0.2, 0.2)
+            return
+        end
     end
 
     if not WeeklyRewardsFrame then
@@ -118,9 +115,9 @@ local function ToggleWeeklyRewards(db)
     MakeWeeklyRewardsFrameMovable(db)
 
     if WeeklyRewardsFrame:IsShown() then
-        WeeklyRewardsFrame:Hide()
+        HideUIPanel(WeeklyRewardsFrame)
     else
-        WeeklyRewardsFrame:Show()
+        ShowUIPanel(WeeklyRewardsFrame)
     end
 end
 
